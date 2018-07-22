@@ -15,37 +15,67 @@
  */
 package com.example.android.quakereport;
 
+// Example code adapted from androidhive
+// https://www.androidhive.info/2016/01/android-working-with-recycler-view/
+//
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
+    private List<Earthquake> earthquakeList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private EarthquakeAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
+        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // setSupportActionBar(toolbar);
 
-        // Create a fake list of earthquake locations.
-        ArrayList<String> earthquakes = new ArrayList<>();
-        earthquakes.add("San Francisco");
-        earthquakes.add("London");
-        earthquakes.add("Tokyo");
-        earthquakes.add("Mexico City");
-        earthquakes.add("Moscow");
-        earthquakes.add("Rio de Janeiro");
-        earthquakes.add("Paris");
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        // get the reference of RecyclerView
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mAdapter = new EarthquakeAdapter(earthquakeList);
+        // not sure if LinearLayoutManager uses getApplication or getApplicationContext
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplication());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
 
-        // set a LinearLayoutManager with default orientation
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
-
-
+        prepareEarthquakeData();
     }
+
+    // Create a fake list of earthquake magnitudes, locations, and dates.
+    private void prepareEarthquakeData() {
+        Earthquake earthquake = new Earthquake("4.5", "San Francisco", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        earthquake = new Earthquake("4.5", "London", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        earthquake = new Earthquake("4.5", "Tokyo", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        earthquake = new Earthquake("4.5", "Mexico City", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        earthquake = new Earthquake("4.5", "Moscow", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        earthquake = new Earthquake("4.5", "Rio de Janeiro", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        earthquake = new Earthquake("4.5", "Paris", "July 22, 2018");
+        earthquakeList.add(earthquake);
+
+        mAdapter.notifyDataSetChanged();
+    }
+
 }
