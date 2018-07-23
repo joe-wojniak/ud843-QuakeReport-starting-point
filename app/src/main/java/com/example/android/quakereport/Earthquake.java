@@ -5,16 +5,16 @@ package com.example.android.quakereport;
 //
 
 public class Earthquake {
-    private String magnitude, city, date;
+    private String magnitude, location, time;
 
     public Earthquake() {
         // public constructor for Earthquake
     }
 
-    public Earthquake(String magnitude, String city, String date) {
+    public Earthquake(String magnitude, String location, String time) {
         this.magnitude = magnitude;
-        this.city = city;
-        this.date = date;
+        this.location = location;
+        this.time = time;
     }
 
     public String getMagnitude() {
@@ -25,19 +25,19 @@ public class Earthquake {
         this.magnitude = mag;
     }
 
-    public String getCity() {
-        return city;
+    public String getLocation() {
+        return location;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
 }
